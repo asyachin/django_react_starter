@@ -6,7 +6,7 @@ ENV PYTHONUNBUFFERED=1
 COPY ./requirements.txt /requirements.txt
 COPY ./requirements.dev.txt /tmp/requirements.dev.txt
 
-ARG DEV=false
+ARG DEBUG=false
 ENV PATH=/py/bin:$PATH
 RUN python -m venv /py && \
     pip install --upgrade pip && \
@@ -14,7 +14,7 @@ RUN python -m venv /py && \
     apk add --update --upgrade --no-cache --virtual .tmp build-base postgresql-dev linux-headers
 
 RUN pip install -r /requirements.txt && apk del .tmp && \
-    if [ $DEV = "true" ]; then \
+    if [ $DEBUG = "true" ]; then \
     pip install -r /tmp/requirements.dev.txt; \
     fi && \
     rm -rf /tmp
