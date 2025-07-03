@@ -20,7 +20,7 @@ jobs:
         run: cp .env.sample backend/.env
 
       - name: Run Tests
-        run: docker compose run --rm backend sh -c "python manage.py test"
+        run: docker compose -f docker-compose-dev.yml run --rm backend sh -c "python manage.py test"
 
       - name: Run Lint
         run: docker compose run --rm backend sh -c "flake8"
