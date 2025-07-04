@@ -35,5 +35,26 @@ services:
       timeout: 5s
       retries: 5
 
+  redis:
+    image: redis:7
+    ports:
+      - "6381:6379"
+  mq:
+    env_file:
+      - .env.sample
+    image: rabbitmq:3.13.7-alpine
+
+  worker:
+    build:
+      context: .
+    env_file:
+      - .env.sample
+    volumes:
+      - ./backend:/backend
+    command: >
+      sh -c "celery -A app.celery worker -l INFO"
+    depends_on:
+      - backend
+      - mq
 volumes:
   db-data:
