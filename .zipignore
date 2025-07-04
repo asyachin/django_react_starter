@@ -1,0 +1,9 @@
+# .zipignore
+*.pyc
+__pycache__/
+.venv/
+.git/
+*.log
+.env
+
+#zip -r makarStarter.zip makar $(cat .zipignore | sed 's/^/ -x /')
