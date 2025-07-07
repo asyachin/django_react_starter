@@ -1,4 +1,4 @@
-# makar
+# Django React Starter
 
 ## Description
 
